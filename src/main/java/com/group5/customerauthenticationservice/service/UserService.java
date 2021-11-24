@@ -1,6 +1,5 @@
 package com.group5.customerauthenticationservice.service;
 
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
