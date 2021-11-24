@@ -35,10 +35,12 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!--<dependency>
+        <!--
+        <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-        </dependency>-->
+        </dependency>
+        -->
 
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -72,6 +74,16 @@
             <version>4.1.0</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.auth0</groupId>
+            <artifactId>java-jwt</artifactId>
+            <version>3.11.0</version>
+        </dependency>
+        <!--<dependency>
+            <groupId>cz.jirutka.spring</groupId>
+            <artifactId>embedmongo-spring</artifactId>
+            <version>RELEASE</version>
+        </dependency>-->
     </dependencies>
     <dependencyManagement>
         <dependencies>
