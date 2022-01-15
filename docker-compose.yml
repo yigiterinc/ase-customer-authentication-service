@@ -11,7 +11,7 @@ services:
     environment:
       - SERVER_PORT=8081
       - SERVER_ADDRESS=0.0.0.0
-      - MONGODB_URI=mongodb://mongo:27017/cas_mongodb
+      - MONGODB_URI=mongodb://cas_mongodb:27017/cas_mongodb
       - MONGODB_STATUS_HOST=cas_mongodb
       - MONGODB_STATUS_PORT=27017
     ports:

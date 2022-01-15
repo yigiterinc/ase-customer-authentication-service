@@ -16,9 +16,9 @@ public class LoginController {
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping(path = "/login")
-    public String login(@RequestParam String username,
+    public String login(@RequestParam String email,
                         @RequestParam String password) {
 
-        return loginService.login(username, password);
+        return loginService.login(email, password);
     }
 }

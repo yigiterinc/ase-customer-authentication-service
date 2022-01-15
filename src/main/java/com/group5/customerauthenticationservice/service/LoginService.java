@@ -29,18 +29,18 @@ public class LoginService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public String login(String username, String password) {
+    public String login(String email, String password) {
         // TODO: Refactor this method
         UserDetails userDetails;
         try {
-            userDetails = userService.loadUserByUsername(username);
+            userDetails = userService.loadUserByUsername(email);
         } catch (UsernameNotFoundException e) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "User not found");
         }
 
         if (passwordEncoder.matches(password, userDetails.getPassword())) {
             Map<String, String> claims = new HashMap<>();
-            claims.put("username", username);
+            claims.put("username", email);
 
             String authorities = userDetails.getAuthorities().stream()
                     .map(GrantedAuthority::getAuthority)
@@ -48,7 +48,7 @@ public class LoginService {
             claims.put("authorities", authorities);
             claims.put("userId", String.valueOf(1));
 
-            return jwtCreator.createJwtForClaims(username, claims);
+            return jwtCreator.createJwtForClaims(email, claims);
         }
 
         throw new IncorrectCredentialsException();
