@@ -27,9 +27,10 @@ public class UserController {
     }
 
     @GetMapping
-    public UserDetails getUser(Authentication authentication) {
+    public ASEDeliveryUser getUser(Authentication authentication) {
         JwtAuthenticationToken token = (JwtAuthenticationToken) authentication;
         Map<String, Object> attributes = token.getTokenAttributes();
-        return userService.loadUserByUsername(attributes.get("username").toString());
+        var email = (String) attributes.get("username"); // email is encoded into username field in attributes
+        return userService.findUser(email);
     }
 }

@@ -33,6 +33,10 @@ public class UserService implements UserDetailsService {
         return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), getAuthority(user));
     }
 
+    public ASEDeliveryUser findUser(String email) {
+        return aseDeliveryUserRepository.findASEDeliveryUserByEmail(email).orElseThrow(RuntimeException::new);
+    }
+
     private Set<SimpleGrantedAuthority> getAuthority(ASEDeliveryUser user) {
         return Collections.singleton(new SimpleGrantedAuthority("ROLE_" + user.getRole()));
     }
