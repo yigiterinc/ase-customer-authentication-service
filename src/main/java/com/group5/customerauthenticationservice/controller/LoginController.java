@@ -6,6 +6,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/login")
 public class LoginController {
 
     final LoginService loginService;
@@ -14,8 +15,7 @@ public class LoginController {
         this.loginService = loginService;
     }
 
-    @ResponseStatus(HttpStatus.OK)
-    @PostMapping(path = "/login")
+    @PostMapping
     public String login(@RequestParam String email,
                         @RequestParam String password) {
 
