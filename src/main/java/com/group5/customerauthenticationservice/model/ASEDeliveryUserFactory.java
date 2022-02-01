@@ -1,10 +1,10 @@
 package com.group5.customerauthenticationservice.model;
 
-import com.group5.customerauthenticationservice.dto.UserDto;
+import com.group5.customerauthenticationservice.dto.CreateUserDto;
 
 public class ASEDeliveryUserFactory {
-    public static ASEDeliveryUser getUser(final UserDto userDto) {
-        var role = userDto.getRole();
+    public static ASEDeliveryUser getUser(final CreateUserDto createUserDto) {
+        var role = createUserDto.getRole();
         return getUser(role);
     }
 

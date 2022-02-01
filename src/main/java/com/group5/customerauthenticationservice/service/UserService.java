@@ -1,11 +1,10 @@
 package com.group5.customerauthenticationservice.service;
 
-import com.group5.customerauthenticationservice.dto.UserDto;
+import com.group5.customerauthenticationservice.dto.CreateUserDto;
 import com.group5.customerauthenticationservice.model.ASEDeliveryUser;
 import com.group5.customerauthenticationservice.model.ASEDeliveryUserFactory;
 import com.group5.customerauthenticationservice.repository.ASEDeliveryUserRepository;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -37,15 +36,19 @@ public class UserService implements UserDetailsService {
         return aseDeliveryUserRepository.findASEDeliveryUserByEmail(email).orElseThrow(RuntimeException::new);
     }
 
+    public ASEDeliveryUser findUserById(String id) {
+        return aseDeliveryUserRepository.findById(id).orElseThrow(RuntimeException::new);
+    }
+
     private Set<SimpleGrantedAuthority> getAuthority(ASEDeliveryUser user) {
         return Collections.singleton(new SimpleGrantedAuthority("ROLE_" + user.getRole()));
     }
 
-    public ASEDeliveryUser create(UserDto userDto) {
-        var user = ASEDeliveryUserFactory.getUser(userDto);
-        user.setEmail(userDto.getEmail());
-        user.setRole(userDto.getRole());
-        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+    public ASEDeliveryUser create(CreateUserDto createUserDto) {
+        var user = ASEDeliveryUserFactory.getUser(createUserDto);
+        user.setEmail(createUserDto.getEmail());
+        user.setRole(createUserDto.getRole());
+        user.setPassword(passwordEncoder.encode(createUserDto.getPassword()));
         return aseDeliveryUserRepository.save(user);
     }
 }

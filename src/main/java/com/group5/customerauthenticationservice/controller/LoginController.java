@@ -1,5 +1,6 @@
 package com.group5.customerauthenticationservice.controller;
 
+import com.group5.customerauthenticationservice.dto.LoginDto;
 import com.group5.customerauthenticationservice.service.LoginService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -16,9 +17,8 @@ public class LoginController {
     }
 
     @PostMapping
-    public String login(@RequestParam String email,
-                        @RequestParam String password) {
+    public String login(@RequestBody LoginDto loginDto) {
 
-        return loginService.login(email, password);
+        return loginService.login(loginDto.getEmail(), loginDto.getPassword());
     }
 }

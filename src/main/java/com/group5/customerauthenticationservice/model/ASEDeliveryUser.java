@@ -1,12 +1,13 @@
 package com.group5.customerauthenticationservice.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.group5.customerauthenticationservice.dto.UserDto;
+import com.group5.customerauthenticationservice.dto.CreateUserDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.Email;
@@ -28,15 +29,16 @@ public abstract class ASEDeliveryUser {
         this.role = role;
     }
 
-    public ASEDeliveryUser(final UserDto userDto) {
-        this.email = userDto.getEmail();
-        this.role = userDto.getRole();
+    public ASEDeliveryUser(final CreateUserDto createUserDto) {
+        this.email = createUserDto.getEmail();
+        this.role = createUserDto.getRole();
     }
 
     @Id
     private String id;
 
     @Email
+    @Indexed(unique = true)
     private String email;
 
     @JsonIgnore
