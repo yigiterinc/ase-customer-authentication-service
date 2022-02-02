@@ -23,14 +23,15 @@ public abstract class ASEDeliveryUser {
         this.role = role;
     }
 
-    public ASEDeliveryUser(final String email, final String password, final Role role) {
+    public ASEDeliveryUser(final String email, final Role role, final String password) {
         this.email = email;
-        this.password = password;
         this.role = role;
+        this.password = password;
     }
 
     public ASEDeliveryUser(final CreateUserDto createUserDto) {
         this.email = createUserDto.getEmail();
+        this.password = createUserDto.getPassword();
         this.role = createUserDto.getRole();
     }
 
@@ -41,8 +42,9 @@ public abstract class ASEDeliveryUser {
     @Indexed(unique = true)
     private String email;
 
+    private Role role;
+
     @JsonIgnore
     private String password;
 
-    private Role role;
 }

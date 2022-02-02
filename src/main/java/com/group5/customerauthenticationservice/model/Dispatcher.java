@@ -9,6 +9,6 @@ public class Dispatcher extends ASEDeliveryUser {
     }
 
     public Dispatcher(String id, @Email String email, String password) {
-        super(id, email, password, Role.DISPATCHER);
+        super(id, email, Role.DISPATCHER, password);
     }
 }

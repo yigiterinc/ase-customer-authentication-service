@@ -33,6 +33,11 @@ public class UserController {
         return userService.findUser(email);
     }
 
+    @GetMapping("/{userId}")
+    public ASEDeliveryUser getUser(@PathVariable String userId) {
+        return userService.findUserById(userId);
+    }
+
     @GetMapping("/{userId}/role")
     public Role getUserRole(@PathVariable String userId) {
         return userService.findUserById(userId).getRole();

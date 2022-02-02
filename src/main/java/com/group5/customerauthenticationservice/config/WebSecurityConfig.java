@@ -16,6 +16,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final ImmutableMap<String, HttpMethod> INSECURE_ENDPOINTS = ImmutableMap.of(
             "/error", HttpMethod.GET,
             "/users", HttpMethod.POST,
+            "/users/*", HttpMethod.GET,
             "/users/*/role", HttpMethod.GET,
             "/login", HttpMethod.POST);
 

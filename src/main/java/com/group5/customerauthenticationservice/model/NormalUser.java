@@ -16,7 +16,7 @@ public class NormalUser extends ASEDeliveryUser {
                       final Role role,
                       final byte[] rfid) {
 
-        super(id, email, password, role);
+        super(id, email, role, password);
         this.rfid = rfid;
     }
 
