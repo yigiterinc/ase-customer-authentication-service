@@ -10,12 +10,13 @@ CMD ./run.sh
 
 
 # cust-auth-service Dockerfile
-# FROM openjdk:8-jdk-alpine
+# FROM openjdk:17-jdk-alpine
 
 # WORKDIR /customer-authentication-service
 
 # COPY target/*.jar customer-authentication-service.jar
-
+# ADD run.sh run.sh
 # EXPOSE 8081
 
-# CMD java -jar /customer-authentication-service/customer-authentication-service.jar
+#RUN chmod +x run.sh
+#CMD ./run.sh
