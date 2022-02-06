@@ -10,24 +10,16 @@ import javax.validation.constraints.Email;
  */
 @NoArgsConstructor
 public class NormalUser extends ASEDeliveryUser {
+
+    public NormalUser(Role role) {
+        super(role);
+    }
+
     public NormalUser(final String id,
                       final @Email String email,
                       final String password,
-                      final Role role,
-                      final byte[] rfid) {
+                      final Role role) {
 
         super(id, email, role, password);
-        this.rfid = rfid;
     }
-
-    private byte[] rfid = new byte[8];
-
-    public byte[] getRfid() {
-        return rfid;
-    }
-
-    public void setRfid(byte[] rfid) {
-        this.rfid = rfid;
-    }
-
 }

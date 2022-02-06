@@ -47,7 +47,6 @@ public class UserService implements UserDetailsService {
     public ASEDeliveryUser create(CreateUserDto createUserDto) {
         var user = ASEDeliveryUserFactory.getUser(createUserDto);
         user.setEmail(createUserDto.getEmail());
-        user.setRole(createUserDto.getRole());
         user.setPassword(passwordEncoder.encode(createUserDto.getPassword()));
         return aseDeliveryUserRepository.save(user);
     }
