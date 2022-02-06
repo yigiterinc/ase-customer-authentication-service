@@ -33,6 +33,14 @@ public class UserController {
         return userService.findUser(email);
     }
 
+    @PostMapping("/role")
+    public Role getUserRoleFromToken(@RequestBody Authentication token) {
+        JwtAuthenticationToken tokenObj = (JwtAuthenticationToken) token;
+        Map<String, Object> attributes = tokenObj.getTokenAttributes();
+        var email = (String) attributes.get("username"); // email is encoded into username field in attributes
+        return userService.findUser(email).getRole();
+    }
+
     @GetMapping("/{userId}")
     public ASEDeliveryUser getUser(@PathVariable String userId) {
         return userService.findUserById(userId);
