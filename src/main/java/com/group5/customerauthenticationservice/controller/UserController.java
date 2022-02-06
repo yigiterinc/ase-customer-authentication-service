@@ -8,6 +8,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -41,13 +42,23 @@ public class UserController {
         return userService.findUser(email).getRole();
     }
 
+    @GetMapping
+    public List<ASEDeliveryUser> getAllUsers() {
+        return userService.getAll();
+    }
+
     @GetMapping("/{userId}")
-    public ASEDeliveryUser getUser(@PathVariable String userId) {
+    public ASEDeliveryUser getUserById(@PathVariable String userId) {
         return userService.findUserById(userId);
     }
 
     @GetMapping("/{userId}/role")
     public Role getUserRole(@PathVariable String userId) {
         return userService.findUserById(userId).getRole();
+    }
+
+    @DeleteMapping("/{userId}")
+    public void deleteUser(@PathVariable String userId) {
+        userService.deleteById(userId);
     }
 }
