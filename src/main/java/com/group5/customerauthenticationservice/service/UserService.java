@@ -12,7 +12,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -32,6 +35,10 @@ public class UserService implements UserDetailsService {
         return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), getAuthority(user));
     }
 
+    public List<ASEDeliveryUser> getAll() {
+        return StreamSupport.stream(aseDeliveryUserRepository.findAll().spliterator(), false).collect(Collectors.toList());
+    }
+
     public ASEDeliveryUser findUser(String email) {
         return aseDeliveryUserRepository.findASEDeliveryUserByEmail(email).orElseThrow(RuntimeException::new);
     }
@@ -47,8 +54,11 @@ public class UserService implements UserDetailsService {
     public ASEDeliveryUser create(CreateUserDto createUserDto) {
         var user = ASEDeliveryUserFactory.getUser(createUserDto);
         user.setEmail(createUserDto.getEmail());
-        user.setRole(createUserDto.getRole());
         user.setPassword(passwordEncoder.encode(createUserDto.getPassword()));
         return aseDeliveryUserRepository.save(user);
+    }
+
+    public void deleteById(String id) {
+        aseDeliveryUserRepository.deleteById(id);
     }
 }
