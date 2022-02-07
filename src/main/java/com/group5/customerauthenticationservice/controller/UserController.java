@@ -33,8 +33,8 @@ public class UserController {
         return userService.findUser(email);
     }
 
-    @PostMapping("/role")
-    public Role getUserRoleFromToken(@RequestBody Authentication token) {
+    @GetMapping("/role")
+    public Role getUserRoleFromToken(Authentication token) {
         JwtAuthenticationToken tokenObj = (JwtAuthenticationToken) token;
         Map<String, Object> attributes = tokenObj.getTokenAttributes();
         var email = (String) attributes.get("username"); // email is encoded into username field in attributes
