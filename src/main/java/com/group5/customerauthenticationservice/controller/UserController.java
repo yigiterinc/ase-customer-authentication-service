@@ -42,7 +42,7 @@ public class UserController {
         return userService.findUser(email).getRole();
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public List<ASEDeliveryUser> getAllUsers() {
         return userService.getAll();
     }
