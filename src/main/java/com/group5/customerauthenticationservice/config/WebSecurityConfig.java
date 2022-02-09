@@ -1,9 +1,7 @@
 package com.group5.customerauthenticationservice.config;
 
-import com.google.common.collect.ImmutableMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
@@ -15,10 +13,10 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Map;
 
 @Component
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
     @Autowired
     CorsConfigurationSource corsConfigurationSource;
 

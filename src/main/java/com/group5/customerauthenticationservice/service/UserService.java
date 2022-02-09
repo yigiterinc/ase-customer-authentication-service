@@ -2,7 +2,6 @@ package com.group5.customerauthenticationservice.service;
 
 import com.group5.customerauthenticationservice.dto.CreateUserDto;
 import com.group5.customerauthenticationservice.model.ASEDeliveryUser;
-import com.group5.customerauthenticationservice.model.ASEDeliveryUserFactory;
 import com.group5.customerauthenticationservice.repository.ASEDeliveryUserRepository;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,8 +13,6 @@ import org.springframework.stereotype.Service;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -36,7 +33,8 @@ public class UserService implements UserDetailsService {
     }
 
     public List<ASEDeliveryUser> getAll() {
-        return StreamSupport.stream(aseDeliveryUserRepository.findAll().spliterator(), false).collect(Collectors.toList());
+        var users = aseDeliveryUserRepository.getAllByRoleExists();
+        return users.get();
     }
 
     public ASEDeliveryUser findUser(String email) {
@@ -52,8 +50,7 @@ public class UserService implements UserDetailsService {
     }
 
     public ASEDeliveryUser create(CreateUserDto createUserDto) {
-        var user = ASEDeliveryUserFactory.getUser(createUserDto);
-        user.setEmail(createUserDto.getEmail());
+        var user = new ASEDeliveryUser(createUserDto);
         user.setPassword(passwordEncoder.encode(createUserDto.getPassword()));
         return aseDeliveryUserRepository.save(user);
     }

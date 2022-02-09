@@ -17,7 +17,7 @@ import javax.validation.constraints.Email;
 @AllArgsConstructor
 @NoArgsConstructor
 @Document(collection = "users")
-public abstract class ASEDeliveryUser {
+public class ASEDeliveryUser {
 
     public ASEDeliveryUser(Role role) {
         this.role = role;
@@ -47,4 +47,6 @@ public abstract class ASEDeliveryUser {
     @JsonIgnore
     private String password;
 
+    @Indexed(unique = true)
+    private String rfid;
 }

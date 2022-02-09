@@ -1,5 +1,7 @@
 package com.group5.customerauthenticationservice.controller;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.interfaces.Claim;
 import com.group5.customerauthenticationservice.dto.CreateUserDto;
 import com.group5.customerauthenticationservice.model.ASEDeliveryUser;
 import com.group5.customerauthenticationservice.model.Role;
@@ -26,12 +28,12 @@ public class UserController {
         return userService.create(createUserDto);
     }
 
-    @GetMapping
-    public ASEDeliveryUser getUser(Authentication authentication) {
-        JwtAuthenticationToken token = (JwtAuthenticationToken) authentication;
-        Map<String, Object> attributes = token.getTokenAttributes();
-        var email = (String) attributes.get("username"); // email is encoded into username field in attributes
-        return userService.findUser(email);
+    @GetMapping("/token/{token}")
+    public ASEDeliveryUser getUser(@PathVariable("token") String tokenString) {
+        var token = JWT.decode(tokenString);
+        Map<String, Claim> claims = token.getClaims();
+        var emailll = claims.get("username");
+        return userService.findUser(emailll.asString());
     }
 
     @GetMapping("/role")
