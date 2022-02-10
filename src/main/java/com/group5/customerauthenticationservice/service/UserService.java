@@ -33,8 +33,7 @@ public class UserService implements UserDetailsService {
     }
 
     public List<ASEDeliveryUser> getAll() {
-        var users = aseDeliveryUserRepository.getAllByRoleExists();
-        return users.get();
+        return aseDeliveryUserRepository.findAll();
     }
 
     public ASEDeliveryUser findUser(String email) {

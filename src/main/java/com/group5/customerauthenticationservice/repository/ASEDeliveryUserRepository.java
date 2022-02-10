@@ -11,5 +11,5 @@ import java.util.Optional;
 public interface ASEDeliveryUserRepository extends CrudRepository<ASEDeliveryUser, String> {
     Optional<ASEDeliveryUser> findASEDeliveryUserByEmail(String email);
 
-    Optional<List<ASEDeliveryUser>> getAllByRoleExists();
+    List<ASEDeliveryUser> findAll();
 }
