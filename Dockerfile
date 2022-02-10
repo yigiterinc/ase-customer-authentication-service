@@ -1,21 +1,21 @@
 FROM bellsoft/liberica-openjdk-alpine-musl:17
-#RUN apk update && apk upgrade && apk add netcat-openbsd
-RUN mkdir -p /usr/local/cas
-ADD target/customer-authentication-service-0.0.1-SNAPSHOT.jar /usr/local/cas/
-ADD run.sh run.sh
+
 EXPOSE 8081
-RUN chmod +x run.sh
-CMD ./run.sh
 
+CMD echo "********************************************************"
+CMD echo "Wait for mongodb to be available"
+CMD echo "********************************************************"
 
-# cust-auth-service Dockerfile
-# FROM openjdk:17-jdk-alpine
+CMD echo $MONGODB_STATUS_HOST $MONGODB_STATUS_PORT
+CMD while ! nc -z $MONGODB_STATUS_HOST $MONGODB_STATUS_PORT; do \
+  printf 'mongodb is still not available. Retrying...\n'; \
+  sleep 3; \
+done;
 
-# WORKDIR /customer-authentication-service
+CMD echo "********************************************************"
+CMD echo "Starting customer-authentication-service"
+CMD echo "********************************************************"
 
-# COPY target/*.jar customer-authentication-service.jar
-# ADD run.sh run.sh
-# EXPOSE 8081
-
-#RUN chmod +x run.sh
-#CMD ./run.sh
+CMD java -Dserver.port=$SERVER_PORT \
+     -Dspring.data.mongodb.uri=$MONGODB_URI \
+     -jar target/customer-authentication-service-0.0.1-SNAPSHOT.jar
